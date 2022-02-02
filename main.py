@@ -3,18 +3,19 @@
 import random
 import sys
 
-from PyQt5 import uic
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 
+from UI import Ui_MainWindow
 
-class Window(QMainWindow):
+
+class Window(QMainWindow, Ui_MainWindow):
     button: QPushButton
     clicked: bool
 
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.program_init()
 
     def program_init(self):
@@ -32,7 +33,11 @@ class Window(QMainWindow):
         qp = QPainter()
         qp.begin(self)
         qp.setBrush(QColor(0, 0, 0, 0))
-        qp.setPen(QColor(255, 255, 0))
+        qp.setPen(QColor(
+            random.randint(0, 255),
+            random.randint(0, 255),
+            random.randint(0, 255)
+        ))
 
         for _ in range(random.randint(2, 11)):
             r = random.randint(1, 100)
